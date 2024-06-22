@@ -1,8 +1,13 @@
-## Getting Started
+# Projeto de Gerenciamento de Funcionários.
+
+Projeto simples de gerenciamento de funcionários para processo seletivo de vaga da empresa ProjeData.
+Código feito em Java, com três classes e etapas realizadas na classe App. Classes devidamente documentadas e comentadas.
+
+### Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+### Folder Structure
 
 The workspace contains two folders by default, where:
 

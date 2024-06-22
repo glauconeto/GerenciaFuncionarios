@@ -1,12 +1,10 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -36,12 +34,12 @@ public class App {
         func.forEach(System.out::println);
 
         // Realiza aumento de 10% para cada funcionário.
-        func.forEach(emp -> emp.setSalary(emp.getSalary().multiply(new BigDecimal("1.1"))));
+        func.forEach(emp -> emp.setSalario(emp.getSalario().multiply(new BigDecimal("1.1"))));
         // func.forEach(System.out::println);
 
         // Agrupa funcionários por função.
         Map<String, List<Funcionario>> funcionariosPorFuncao = func.stream()
-                .collect(Collectors.groupingBy(Funcionario::getFunction));
+                .collect(Collectors.groupingBy(Funcionario::getCargo));
 
         // Lista os funcionários agrupados por função.
         System.out.println("\nFuncionários agrupados por função:");
@@ -56,7 +54,7 @@ public class App {
                 .filter(emp -> emp.getDataDeAniversario().getMonth() == Month.OCTOBER || emp.getDataDeAniversario().getMonth() == Month.DECEMBER)
                 .forEach(emp -> {
                     String dataFormatada = emp.getDataDeAniversario().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    System.out.println(emp.getName() + " - Aniversário: " + dataFormatada);
+                    System.out.println(emp.getNome() + " - Aniversário: " + dataFormatada);
                 });
 
         // 3.8 - Imprime o funcionário mais velho.
@@ -67,27 +65,27 @@ public class App {
         
         if (funcionarioVelho != null) {
             int idade = LocalDate.now().getYear() - funcionarioVelho.getDataDeAniversario().getYear();
-            System.out.println("Nome: " + funcionarioVelho.getName() + ", Idade: " + idade);
+            System.out.println("Nome: " + funcionarioVelho.getNome() + ", Idade: " + idade);
         }
 
         // Imprime uma lista de funcionários em ordem alfabética.
         System.out.println("\nFuncionarios em ordem alfabética:");
         func.stream()
-                .sorted((emp1, emp2)->emp1.getName().compareTo(emp2.getName()))
+                .sorted((emp1, emp2)->emp1.getNome().compareTo(emp2.getNome()))
                 .forEach(System.out::println);
 
         // Imprime o total dos salários dos funcionários.
         BigDecimal totalSalaries = func.stream()
-                .map(Funcionario::getSalary)
+                .map(Funcionario::getSalario)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println("\nTotal de salários: " + String.format("%,.2f", totalSalaries));
 
         // Imprime quantos salários mínimos ganha cada funcionário, considerando que o salário mínimo é R$1212.00.
         System.out.println("\nQuantos salários mínimos ganha cada funcionário:\n");
         func.forEach(emp -> {
-            BigDecimal numMinimumWages = emp.getSalary().divide(new BigDecimal("1212.00"), RoundingMode.HALF_DOWN);
+            BigDecimal numMinimumWages = emp.getSalario().divide(new BigDecimal("1212.00"), RoundingMode.HALF_DOWN);
             
-            System.out.println(emp.getName() + ": " + String.format("%,.2f", numMinimumWages) + " salários mínimos");
+            System.out.println(emp.getNome() + ": " + String.format("%,.2f", numMinimumWages) + " salários mínimos");
         });
     }
 }
